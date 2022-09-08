@@ -1,8 +1,12 @@
-#Include <stdio.h>
+#include <stdio.h>
 
 /**
-* main - print the string in the put function
-*
-* Description: using the main function 
-*
-cat -t
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+	printf("with proper grammar, but the outcome is a place of art,\n");
+	return (0);
+}
