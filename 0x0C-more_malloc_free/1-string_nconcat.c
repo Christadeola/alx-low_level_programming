@@ -1,69 +1,47 @@
 #include "main.h"
-/**
- *_strlen - count array
- *@s: array of elements
- *Return: int i
- */
-int _strlen(char *s)
-{
-unsigned int i;
-
-i = 0;
-while (s[i] != '\0') /*Count charater of string*/
-{
-i++;
-}
-return (i);
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- *string_nconcat - concatenates two strings
- *@s1: string
- *@s2: string
- *@n: number bytes
- *Return: char dst
+ * string_nconcat -  concatenates two strings
+ * @s1: string1
+ * @s2: string2
+ * @n: n bytes of string 2
+ *
+ * Return: Pointer to allocated memory of s1 + nbytes of s2
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-char *dst;
-unsigned int i, count, j, size, size_1, size_2;
+	unsigned int l1, l2, i, j;
+	char *s;
+	char *nul = "";
 
-if (s1 == NULL) /*If the array is empty*/
-s1 = "";
+	if (s1 == NULL)
+		s1 = nul;
+	if (s2 == NULL)
+		s2 = nul;
 
-if (s2 == NULL)
-s2 = "";
+	l1 = 0, l2 = 0;
+	while (*(s1 + l1))
+		l1++;
+	while (*(s2 + l2))
+		l2++;
 
-size_1 = _strlen(s1);
-size_2 = _strlen(s2);
+	if (n < l2)
+		l2 = n;
 
-if (n >= size_2)
-{
-count = size_2;
-}
-else
-{
-count = n;
-}
-/*count size total*/
-size = size_1 + count + 1;
-/*malloc*/
-dst = (char *) malloc(size * sizeof(char));
-if (dst == 0)
-{
-return (NULL);
-}
-/*Concantenate arrays*/
-{
-for (i = 0; *(s1 + i) != '\0'; i++)
-*(dst + i) = *(s1 + i);
-for (j = 0; j < count; j++)
-{
-*(dst + i) = *(s2 + j);
-i++;
-}
-*(dst + i) = '\0';
-}
-return (dst);
+	s = malloc(sizeof(char) * (l1 + l2 + 1));
 
+	if (s == 0)
+		return (0);
+
+	for (i = 0; i < l1; i++)
+		*(s + i) = *(s1 + i);
+
+	for (i = 0, j = l1; i < l2; j++, i++)
+		*(s + j) = *(s2 + i);
+
+	*(s + j) = '\0';
+
+	return (s);
 }
